@@ -1,0 +1,35 @@
+section {
+    background-size: cover;
+    width: 100%;
+    /* background-image: url(''); */
+    height: 100vh;
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.contain:hover {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.hero {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    color: #fff;
+    text-align: center;
+    backdrop-filter: blur(16px);
+    background: rgba(39, 39, 39, 0.815);
+    /* min-width: 100%; */
+}
+
+.opciones {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}

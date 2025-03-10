@@ -1,0 +1,130 @@
+<app-navbar></app-navbar>
+<section class="w-full hero"></section>
+<section class="max-h-full w-full pt-[100px] bg-hero">
+  <div class="lg:px-[4rem] gap-y-4">
+    <div class="flex flex-col shadow-xl lg:px-[2rem]">
+      <!-- CAROUSEL DE CATEGORIAS -->
+      <div
+        class="w-full opciones justify-around flex overflow-x-auto no-scrollbar py-4 rounded-lg gap-4 uppercase text-center text-sm font-medium sticky top-0 bg-white z-50 border-b-2"
+      >
+        <a
+          *ngFor="let c of categorias"
+          [routerLink]="[]"
+          [fragment]="c.nombreCategoria | lowercase"
+        >
+          <div class="flex flex-col">
+            <div class="">
+              <i
+                class="fa-solid fa-utensils p-4 px-5 border text-4xl drop-shadow rounded-full"
+              ></i>
+            </div>
+            <div class="flex flex-col gap-y-2 px-5 py-2">
+              <p>{{ c.nombreCategoria }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <hr class="border-1" />
+      <!-- ------------------------------------------------- secciones -->
+      <div
+        class="w-full gap-4 m-auto my-8 BORDER BOR"
+        *ngFor="let c of categorias"
+        [id]="c.nombreCategoria | lowercase"
+        style="scroll-margin-top: 200px"
+      >
+        <div
+          class="w-full opciones flex flex-col mb-6 rounded-lg m-auto relative text-center text-sm font-medium gap-y-4"
+        >
+          <!-- NOMBRE CATEGORIA -->
+          <div class="flex justify-center flex-col text-center">
+            <h2 class="uppercase text-xl font-bold text-white">
+              {{ c.nombreCategoria }}
+            </h2>
+            <div class="border-2 w-20 mx-auto"></div>
+          </div>
+
+          <!-- Muestra los productos dentro de la categoría -->
+          <div
+            *ngIf="c.productos && c.productos.length > 0"
+            class="flex flex-col text-left gap-y-2 uppercase px-2"
+          >
+            <div
+              class="grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 gap-4 p-1"
+            >
+              <!-- Mostrar productos -->
+              <div
+                *ngFor="let p of c.productos"
+                class="rounded-lg border w-full h-full bg-slate-50"
+              >
+                <div
+                  class="flex w-full gap-2 justify-between shadow-lg items-center rounded-lg h-full"
+                >
+                  <div
+                    class="flex flex-col gap-y-2 text-left px-2 py-4 w-[80%]"
+                  >
+                    <div class="flex justify-between relative">
+                      <p class="font-bold uppercase w-auto">
+                        {{ p.titulo }}
+                      </p>
+                      <div class="flex gap-2 items-center">
+                        <!-- Mostrar íconos de celíaco, vegano -->
+                        <img
+                          *ngIf="p.isCeliaco"
+                          src="https://lasfor.com.ar/wp-content/uploads/2021/04/xSNK12_BLOG_Interna_TipsIdentificarSinTACC_RX2.jpg.pagespeed.ic.t3bYxF1Fgs.jpg"
+                          alt=""
+                          class="h-12 w-20 absolute top-[-20px] right-0 mr-6"
+                        />
+                        <img
+                          *ngIf="p.isVegano"
+                          src="https://upload.wikimedia.org/wikipedia/fr/c/cd/EVU.png"
+                          alt=""
+                          class="h-8 w-8 absolute top-[-11px] right-4"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Descripción del producto -->
+                    <span class="text-xs relative descripcion text-slate-400">
+                      {{
+                        p.descripcion == "null"
+                          ? "No hay descripción."
+                          : p.descripcion
+                      }}
+                    </span>
+
+                    <!-- Precio -->
+                    <div class="flex font-bold">
+                      <button
+                        class="border border-red-500 px-2 py-1 cursor-default items-center rounded-lg flex gap-x-2"
+                      >
+                        <i class="fa-solid fa-tags text-base"></i>
+                        <span>{{ p.precio | currency : "USD" }}</span>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Imagen del producto -->
+                  <div class="mx-2">
+                    <img
+                      src="https://menu.fu.do/assets/img/icons/product-default.svg
+                      "
+                      alt="Imagen del producto"
+                      class="h-16 w-32 rounded-lg object-cover mx-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Si no hay productos en la categoría -->
+          <div *ngIf="!c.productos || c.productos.length === 0">
+            <p class="text-white">
+              No hay productos disponibles en esta categoría.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

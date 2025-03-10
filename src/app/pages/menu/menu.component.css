@@ -1,0 +1,86 @@
+/* .opciones {
+  overflow: hidden;
+} */
+*/
+
+/* Para ocultar las barras de desplazamiento en navegadores que las muestran */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Safari y Chrome */
+}
+
+/* Estilo del contenedor para que permita desplazamiento horizontal */
+.opciones {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    /* Mantiene los elementos en una sola fila */
+    scroll-behavior: smooth;
+    /* Suaviza el scroll */
+}
+
+/* Estilo para los elementos individuales */
+.opciones a {
+    flex: 0 0 auto;
+    /* Asegura que los elementos no se reduzcan para caber en una fila */
+    width: auto;
+}
+
+i {
+    color: rgb(238, 10, 10);
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    height: 256px;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/assets/menu/titulo.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* filter: blur(16px); */
+    z-index: -1;
+    padding: 0px;
+    margin: 0px;
+    background-color: black;
+}
+
+img {
+    filter: brightness(1);
+    mix-blend-mode: multiply;
+}
+
+.descripcion {
+    max-width: 100%;
+    /* Asegura que el texto no exceda el contenedor */
+    overflow-wrap: break-word;
+    /* Hace que las palabras largas se dividan */
+    word-break: break-word;
+    /* También ayuda a dividir palabras muy largas */
+    white-space: normal;
+    /* Evita que el texto se mantenga en una sola línea */
+}
+
+.bg-hero {
+    background-image: url(/assets/menu/fondo-cafe.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
