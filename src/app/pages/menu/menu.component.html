@@ -7,7 +7,7 @@
     <div class="flex flex-col shadow-xl lg:px-[2rem]">
       <!-- CAROUSEL DE CATEGORIAS -->
       <div
-        class="w-full opciones justify-around flex overflow-x-auto no-scrollbar py-4 rounded-lg gap-4 uppercase text-center text-sm font-medium sticky top-0 bg-white z-50 border-b-2"
+        class="w-full opciones justify-around flex overflow-x-auto no-scrollbar py-4 rounded-lg gap-4 uppercase text-center text-sm font-medium sticky top-0 bg-white z-50 border-b-2 opacity-80"
       >
         <a
           *ngFor="let c of categorias"
@@ -27,16 +27,15 @@
         </a>
       </div>
 
-      <hr class="border-1" />
       <!-- ------------------------------------------------- secciones -->
       <div
-        class="w-full gap-4 m-auto my-8 BORDER BOR"
+        class="w-full gap-4 m-auto my-8"
         *ngFor="let c of categorias"
         [id]="c.nombreCategoria | lowercase"
-        style="scroll-margin-top: 200px"
+        style="scroll-margin-top: 120px"
       >
         <div
-          class="w-full opciones flex flex-col py-12 rounded-lg m-auto relative text-center text-sm font-medium gap-y-4"
+          class="w-full opciones flex flex-col pt-36 rounded-lg m-auto relative text-center text-sm font-medium gap-y-4"
         >
           <!-- NOMBRE CATEGORIA -->
           <div class="flex justify-center flex-col text-center">
@@ -49,7 +48,7 @@
           <!-- Muestra los productos dentro de la categoría -->
           <div
             *ngIf="c.productos && c.productos.length > 0"
-            class="flex flex-col text-left gap-y-2 uppercase px-2"
+            class="flex flex-col text-left gap-y-2 uppercase px-2 opacity-80"
           >
             <div
               class="grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 gap-4 p-1"
@@ -73,13 +72,13 @@
                         <!-- Mostrar íconos de celíaco, vegano -->
                         <img
                           *ngIf="p.isCeliaco"
-                          src="https://lasfor.com.ar/wp-content/uploads/2021/04/xSNK12_BLOG_Interna_TipsIdentificarSinTACC_RX2.jpg.pagespeed.ic.t3bYxF1Fgs.jpg"
+                          src="./assets/sintacc.webp"
                           alt=""
                           class="h-12 w-20 absolute top-[-20px] right-0 mr-6 img"
                         />
                         <img
                           *ngIf="p.isVegano"
-                          src="https://upload.wikimedia.org/wikipedia/fr/c/cd/EVU.png"
+                          src="./assets/vegetariano.webp"
                           alt=""
                           class="h-8 w-8 absolute top-[-11px] right-4 img"
                         />
@@ -108,10 +107,12 @@
                   <!-- Imagen del producto -->
                   <div class="mx-2">
                     <img
-                      src="https://menu.fu.do/assets/img/icons/product-default.svg
+                      [src]="
+                        p.urlImagen ||
+                        'https://menu.fu.do/assets/img/icons/product-default.svg'
                       "
                       alt="Imagen del producto"
-                      class="h-16 w-32 rounded-lg object-cover mx-auto img"
+                      class="h-32 w-32 rounded-lg object-contain mx-auto img"
                     />
                   </div>
                 </div>

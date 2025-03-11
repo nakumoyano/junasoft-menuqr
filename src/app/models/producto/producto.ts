@@ -11,4 +11,5 @@ export class Producto {
   isVegetariano: boolean;
   idCategoria: number;
   categoria?: Categoria;
+  urlImagen?: string;
 }

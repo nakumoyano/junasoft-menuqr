@@ -54,7 +54,7 @@ export class AgregarProductoComponent implements OnInit {
     this.mostrarSkeleton = false;
 
     this.createForm();
-    // this.cargarDatosEnFormulario();
+    this.cargarDatosEnFormulario();
     this.cargarCmbCategoria();
   }
 
@@ -100,7 +100,9 @@ export class AgregarProductoComponent implements OnInit {
             this.frmAddEditProducto.reset();
             this.selectedFiles = [];
             this.loading = false;
-            // location.reload();
+            setTimeout(() => {
+              location.reload();
+            }, 200);
           },
           error: (error: any) => {
             this.toastr.error(
@@ -212,51 +214,42 @@ export class AgregarProductoComponent implements OnInit {
   }
 
   // f************************************** FUNCION PARA CARGAR FORMULARIO CON DATOS ***************************
-  // cargarDatosEnFormulario() {
-  //   this.activatedRoute.params.subscribe((params) => {
-  //     const id = params['id'];
-  //     this.idProducto = id;
+  cargarDatosEnFormulario() {
+    this.activatedRoute.params.subscribe((params) => {
+      const id = params['id'];
+      this.idProducto = id;
 
-  //     if (id) {
-  //       this.isEdit = true;
-  //       this.mostrarSkeleton = true;
-  //       this.productosService.getDataByIdProductoCompleto(id).subscribe(
-  //         (data: any) => {
-  //           console.log('data patchvalue', data);
+      if (id) {
+        this.isEdit = true;
+        this.mostrarSkeleton = true;
+        this.productosService.getDataById(id).subscribe(
+          (data: any) => {
+            console.log('data patchvalue', data);
 
-  //           const resultado = data.resultado;
+            const resultado = data.resultado;
 
-  //           // Mapear productos seleccionados
-  //           this.selectedProducto = resultado.productos.map(
-  //             (producto: any) => producto.idProducto
-  //           );
+            // PatchValue al formulario
+            this.frmAddEditProducto.patchValue(data.resultado);
+            this.selectedCategoria = data.resultado.idCategoria;
 
-  //           // PatchValue al formulario
-  //           this.frmAddEditProducto.patchValue({
-  //             idProductos: this.selectedProducto,
-  //             precio: data.resultado.precio,
-  //             nombreproducto: data.resultado.nombreproducto,
-  //             descripcion: data.resultado.descripcion,
-  //           });
+            // Cargar las imágenes si existen
+            const urlImagenes = resultado.urlImagenes;
+            if (urlImagenes) {
+              this.archivos = urlImagenes
+                .split(',')
+                .filter((url: any) => url.trim() !== '');
+            }
 
-  //           // Cargar las imágenes si existen
-  //           const urlImagenes = resultado.urlImagenes;
-  //           if (urlImagenes) {
-  //             this.archivos = urlImagenes
-  //               .split(',')
-  //               .filter((url: any) => url.trim() !== '');
-  //           }
-
-  //           this.mostrarSkeleton = false;
-  //         },
-  //         (error) => {
-  //           console.error(error);
-  //           this.mostrarSkeleton = false;
-  //         }
-  //       );
-  //     }
-  //   });
-  // }
+            this.mostrarSkeleton = false;
+          },
+          (error) => {
+            console.error(error);
+            this.mostrarSkeleton = false;
+          }
+        );
+      }
+    });
+  }
 
   // D****************************************** FUCNIONES PARA EL INPUT DE ARCHIVO *****************
   onFileSelected(event: Event): void {
