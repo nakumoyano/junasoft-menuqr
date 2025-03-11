@@ -101,7 +101,12 @@
           currentPageReportTemplate="{first} a {last} de {{
             totalRecords
           }} elementos"
-          [globalFilterFields]="['titulo']"
+          [globalFilterFields]="[
+            'titulo',
+            'categoria.nombreCategoria',
+            'precio',
+            'descripcion'
+          ]"
         >
           <ng-template pTemplate="header">
             <tr class="border">
@@ -112,7 +117,14 @@
               >
                 Acción
               </th>
+              <th scope="col" class="px-6 py-3 uppercase">imagen</th>
               <th scope="col" class="px-6 py-3 uppercase">producto</th>
+              <th scope="col" class="px-6 py-3 uppercase">categoria</th>
+              <th scope="col" class="px-6 py-3 uppercase">precio</th>
+              <th scope="col" class="px-6 py-3 uppercase">descripción</th>
+              <th scope="col" class="px-6 py-3 uppercase">celiaco</th>
+              <th scope="col" class="px-6 py-3 uppercase">vegano</th>
+              <th scope="col" class="px-6 py-3 uppercase">vegetariano</th>
             </tr></ng-template
           >
 
@@ -140,7 +152,56 @@
                 </div>
               </td>
               <td class="px-6 py-4 text-sm border-r font-bold uppercase">
+                <img
+                  [src]="
+                    c.urlImagen ||
+                    'https://menu.fu.do/assets/img/icons/product-default.svg'
+                  "
+                  [alt]="c.titulo"
+                  class="border h-12 w-12 rounded-full mx-auto"
+                />
+              </td>
+              <td class="px-6 py-4 text-sm border-r font-bold uppercase">
                 {{ c.titulo }}
+              </td>
+              <td class="px-6 py-4 text-sm border-r font-bold uppercase">
+                {{ c.categoria?.nombreCategoria }}
+              </td>
+              <td class="px-6 py-4 text-sm border-r font-bold uppercase">
+                {{ c.precio }}
+              </td>
+              <td class="px-6 py-4 text-sm border-r font-bold uppercase">
+                {{ c.descripcion }}
+              </td>
+              <td
+                class="px-6 py-4 text-sm border-r"
+                [ngClass]="
+                  c.isCeliaco == false
+                    ? 'text-red-600 uppercase font-bold'
+                    : 'text-green-600 uppercase font-bold'
+                "
+              >
+                {{ c.isCeliaco == false ? "NO" : "SI" }}
+              </td>
+              <td
+                class="px-6 py-4 text-sm border-r"
+                [ngClass]="
+                  c.isVegano == false
+                    ? 'text-red-600 uppercase font-bold'
+                    : 'text-green-600 uppercase font-bold'
+                "
+              >
+                {{ c.isVegano == false ? "NO" : "SI" }}
+              </td>
+              <td
+                class="px-6 py-4 text-sm border-r"
+                [ngClass]="
+                  c.isVegetariano == false
+                    ? 'text-red-600 uppercase font-bold'
+                    : 'text-green-600 uppercase font-bold'
+                "
+              >
+                {{ c.isVegetariano == false ? "NO" : "SI" }}
               </td>
             </tr>
           </ng-template>

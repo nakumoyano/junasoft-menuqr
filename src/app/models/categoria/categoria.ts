@@ -6,4 +6,5 @@ export class Categoria {
   linkEnlaceMenu: string;
   file: any;
   productos?: Producto[];
+  urlImagenLogo?: string;
 }

@@ -112,6 +112,7 @@
               >
                 Acción
               </th>
+              <th scope="col" class="px-6 py-3 uppercase">imagen</th>
               <th scope="col" class="px-6 py-3 uppercase">categoría</th>
             </tr></ng-template
           >
@@ -138,6 +139,16 @@
                   >
                   </app-boton-eliminar>
                 </div>
+              </td>
+              <td class="px-6 py-4 text-sm border-r font-bold uppercase">
+                <img
+                  [src]="
+                    c.urlImagenLogo ||
+                    'https://menu.fu.do/assets/img/icons/product-default.svg'
+                  "
+                  [alt]="c.nombreCategoria"
+                  class="border h-12 w-12 rounded-full mx-auto"
+                />
               </td>
               <td class="px-6 py-4 text-sm border-r font-bold uppercase">
                 {{ c.nombreCategoria }}

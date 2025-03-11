@@ -19,7 +19,7 @@
 .card {
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-image: url(https://inmobiliarialolallar.com.ar/wp-content/uploads/2023/01/WhatsApp-Image-2023-01-18-at-14.13.10-1024x651.jpeg); */
+    background-image: url(https://previews.123rf.com/images/dedivan1923/dedivan19231510/dedivan1923151000096/46568848-concepto-del-caf%C3%A9-del-collage.jpg);
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
@@ -28,6 +28,7 @@
     background-size: cover;
     border-radius: 8px;
     padding: 0px;
+    background-position: center;
 }
 
 .table-container {

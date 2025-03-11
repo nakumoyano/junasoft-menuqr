@@ -32,7 +32,7 @@ export class ListadoDeCategoriasComponent implements OnInit {
     this.categoriasService.getAllData().subscribe(
       (data: any) => {
         this.categorias = data.resultado;
-        // console.log(this.pagos);
+        console.log(this.categorias);
         this.loading = false;
         this.totalRecords = this.categorias.length;
       },

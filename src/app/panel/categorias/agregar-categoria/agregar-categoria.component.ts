@@ -211,7 +211,7 @@ export class AgregarCategoriaComponent implements OnInit {
             });
 
             // Cargar las imágenes si existen
-            const urlImagenes = resultado.urlImagenes;
+            const urlImagenes = resultado.urlImagenLogo;
             if (urlImagenes) {
               this.archivos = urlImagenes
                 .split(',')

@@ -60,11 +60,52 @@ export class ProductosService {
   }
 
   // EDITAR DATOS
-  updateData(producto: Producto): Observable<Producto> {
-    return this.http.put<Producto>(
-      this.API_URL + '/' + producto.idProducto,
-      producto
-    );
+  // updateData(producto: Producto): Observable<Producto> {
+  //   return this.http.put<Producto>(
+  //     this.API_URL + '/' + producto.idProducto,
+  //     producto
+  //   );
+  // }
+  updateData(
+    idProducto: number,
+    titulo: string,
+    descripcion: string,
+    file: any,
+    precio: number,
+    isCeliaco: number,
+    isVegano: number,
+    isVegetariano: number,
+    idCategoria: number
+  ): Observable<Producto> {
+    const formData: FormData = new FormData();
+
+    formData.append('idProducto', idProducto.toString());
+    formData.append('titulo', titulo);
+    formData.append('descripcion', descripcion);
+
+    if (precio !== null && precio !== undefined) {
+      formData.append('precio', precio.toString());
+    }
+    if (isCeliaco !== null && isCeliaco !== undefined) {
+      formData.append('isCeliaco', isCeliaco.toString());
+    }
+    if (isVegano !== null && isVegano !== undefined) {
+      formData.append('isVegano', isVegano.toString());
+    }
+    if (isVegetariano !== null && isVegetariano !== undefined) {
+      formData.append('isVegetariano', isVegetariano.toString());
+    }
+    if (idCategoria !== null && idCategoria !== undefined) {
+      formData.append('idCategoria', idCategoria.toString());
+    }
+
+    if (file && file.length > 0) {
+      file.forEach((file: any) => {
+        formData.append('file', file, file.name);
+      });
+    }
+
+    return this.http.put<Producto>(`${this.API_URL}/${idProducto}`, formData);
   }
 
   // GET BY ID

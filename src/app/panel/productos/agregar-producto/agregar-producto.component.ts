@@ -12,6 +12,7 @@ import { Categoria } from 'src/app/models/categoria/categoria';
 import { Producto } from 'src/app/models/producto/producto';
 import { CategoriasService } from 'src/app/services/categorias/categorias.service';
 import { ProductosService } from 'src/app/services/productos/productos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -128,89 +129,95 @@ export class AgregarProductoComponent implements OnInit {
 
   // f************************************** FUNCION PARA EDITAR BARRIO ***************************
   onUpdate() {
-    // if (this.frmAddEditProducto.valid) {
-    //   this.loading = true;
-    //   const formData = new FormData(); // Usamos FormData para enviar los archivos
-    //   // Obtener los archivos existentes (URLs)
-    //   let archivosExistentes: string[] = [];
-    //   if (this.archivos.length > 0) {
-    //     archivosExistentes = this.archivos.filter((url) => url.trim() !== '');
-    //   }
-    //   // Combinar archivos existentes con los nuevos
-    //   const archivosFinales: File[] = [];
-    //   // Simular Blobs para las URLs existentes (si es necesario)
-    //   archivosExistentes.forEach((url) => {
-    //     const blob = new Blob(); // Simulamos un Blob vacío (el backend debe manejar estos blobs)
-    //     archivosFinales.push(new File([blob], url)); // Usamos la URL como nombreproducto del archivo
-    //   });
-    //   // Agregar archivos seleccionados al arreglo final
-    //   if (this.selectedFiles && this.selectedFiles.length > 0) {
-    //     this.selectedFiles.forEach((file) => {
-    //       archivosFinales.push(file);
-    //     });
-    //   }
-    //   // Agregar los valores del formulario al FormData
-    //   const formValues = this.frmAddEditProducto.value;
-    //   formData.append('idProducto', formValues.idProducto);
-    //   formData.append('nombreproducto', formValues.nombreproducto);
-    //   formData.append('descripcion', formValues.descripcion);
-    //   formData.append('precio', formValues.precio);
-    //   // Agregar los archivos al FormData
-    //   archivosFinales.forEach((file) => {
-    //     formData.append('files', file, file.name);
-    //   });
-    //   Swal.fire({
-    //     title: '¿Estás seguro que deseas editar este producto?',
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#2563EB',
-    //     cancelButtonColor: '#4B5563',
-    //     confirmButtonText: 'Si, editar',
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       this.subscription.add(
-    //         this.productosService
-    //           .updateData(
-    //             this.idProducto,
-    //             formValues.nombreproducto,
-    //             formValues.descripcion,
-    //             formValues.precio,
-    //             formValues.idProductos,
-    //             formValues.urlImagenes,
-    //             archivosFinales
-    //           )
-    //           .subscribe({
-    //             next: (response: any) => {
-    //               console.log('respuesta al editar', response);
-    //               Swal.fire(
-    //                 '¡Editado!',
-    //                 '¡El producto se ha editado correctamente!',
-    //                 'success'
-    //               );
-    //               this.loading = false;
-    //               this.router
-    //                 .navigate(['/admin/productos/listado-de-productos'])
-    //                 .then(() => {
-    //                   location.reload();
-    //                 });
-    //             },
-    //             error: (error: any) => {
-    //               console.log('error al editar productos', error);
-    //               Swal.fire(
-    //                 'Error!',
-    //                 'Ha ocurrido un error. Inténtelo de nuevo más tarde.',
-    //                 'error'
-    //               );
-    //             },
-    //           })
-    //       );
-    //     }
-    //   });
-    // } else {
-    //   this.toastr.error(
-    //     'Ocurrió un error, revise los campos e intente nuevamente'
-    //   );
-    // }
+    if (this.frmAddEditProducto.valid) {
+      this.loading = true;
+      const formData = new FormData(); // Usamos FormData para enviar los archivos
+      // Obtener los archivos existentes (URLs)
+      let archivosExistentes: string[] = [];
+      if (this.archivos.length > 0) {
+        archivosExistentes = this.archivos.filter((url) => url.trim() !== '');
+      }
+      // Combinar archivos existentes con los nuevos
+      const archivosFinales: File[] = [];
+      // Simular Blobs para las URLs existentes (si es necesario)
+      archivosExistentes.forEach((url) => {
+        const blob = new Blob(); // Simulamos un Blob vacío (el backend debe manejar estos blobs)
+        archivosFinales.push(new File([blob], url)); // Usamos la URL como nombreproducto del archivo
+      });
+      // Agregar archivos seleccionados al arreglo final
+      if (this.selectedFiles && this.selectedFiles.length > 0) {
+        this.selectedFiles.forEach((file) => {
+          archivosFinales.push(file);
+        });
+      }
+      // Agregar los valores del formulario al FormData
+      const formValues = this.frmAddEditProducto.value;
+      formData.append('idProducto', formValues.idProducto);
+      formData.append('titulo', formValues.titulo);
+      formData.append('descripcion', formValues.descripcion);
+      formData.append('precio', formValues.precio);
+      formData.append('isCeliaco', formValues.isCeliaco);
+      formData.append('isVegano', formValues.isVegano);
+      formData.append('isVegetariano', formValues.isVegetariano);
+      formData.append('idCategoria', formValues.idCategoria);
+      // Agregar los archivos al FormData
+      archivosFinales.forEach((file) => {
+        formData.append('file', file, file.name);
+      });
+      Swal.fire({
+        title: '¿Estás seguro que deseas editar este producto?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#2563EB',
+        cancelButtonColor: '#4B5563',
+        confirmButtonText: 'Si, editar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.subscription.add(
+            this.productosService
+              .updateData(
+                this.idProducto,
+                formValues.titulo,
+                formValues.descripcion,
+                archivosFinales,
+                formValues.precio,
+                formValues.isCeliaco,
+                formValues.isVegano,
+                formValues.isVegetariano,
+                formValues.idCategoria
+              )
+              .subscribe({
+                next: (response: any) => {
+                  console.log('respuesta al editar', response);
+                  Swal.fire(
+                    '¡Editado!',
+                    '¡El producto se ha editado correctamente!',
+                    'success'
+                  );
+                  this.loading = false;
+                  this.router
+                    .navigate(['/admin/productos/listado-de-productos'])
+                    .then(() => {
+                      location.reload();
+                    });
+                },
+                error: (error: any) => {
+                  console.log('error al editar productos', error);
+                  Swal.fire(
+                    'Error!',
+                    'Ha ocurrido un error. Inténtelo de nuevo más tarde.',
+                    'error'
+                  );
+                },
+              })
+          );
+        }
+      });
+    } else {
+      this.toastr.error(
+        'Ocurrió un error, revise los campos e intente nuevamente'
+      );
+    }
   }
 
   // f************************************** FUNCION PARA CARGAR FORMULARIO CON DATOS ***************************
@@ -233,7 +240,7 @@ export class AgregarProductoComponent implements OnInit {
             this.selectedCategoria = data.resultado.idCategoria;
 
             // Cargar las imágenes si existen
-            const urlImagenes = resultado.urlImagenes;
+            const urlImagenes = resultado.urlImagen;
             if (urlImagenes) {
               this.archivos = urlImagenes
                 .split(',')

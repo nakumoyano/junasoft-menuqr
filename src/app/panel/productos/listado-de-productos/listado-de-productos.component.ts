@@ -31,7 +31,7 @@ export class ListadoDeProductosComponent implements OnInit {
     this.productosService.getAllData().subscribe(
       (data: any) => {
         this.productos = data.resultado;
-        // console.log(this.pagos);
+        console.log(this.productos);
         this.loading = false;
         this.totalRecords = this.productos.length;
       },
