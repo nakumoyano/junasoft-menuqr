@@ -66,6 +66,6 @@ export class ListadoDeProductosComponent implements OnInit {
 
   // d***************************************** FUNCION PARA REDIRECCIONAR A AGREGAR PROYECTO ***********************************
   navigateToProducto() {
-    this.router.navigate(['/admin/productos/crear-producto']);
+    this.router.navigate(['/admin/productos/agregar-producto']);
   }
 }
