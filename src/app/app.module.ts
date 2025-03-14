@@ -35,9 +35,11 @@ import { AgregarProductoComponent } from './panel/productos/agregar-producto/agr
 import { ListadoDeProductosComponent } from './panel/productos/listado-de-productos/listado-de-productos.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MalaCalificacionComponent } from './pages/resenias/mala-calificacion/mala-calificacion.component';
+import { CalificacionEstrellasComponent } from './pages/resenias/calificacion-estrellas/calificacion-estrellas.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, DashboardComponent, PanelRightComponent, InicioComponent, AgregarCategoriaComponent, BotonCancelarComponent, SkeletonGridComponent, ListadoDeCategoriasComponent, BotonEliminarComponent, AgregarProductoComponent, ListadoDeProductosComponent, MenuComponent, NavbarComponent],
+  declarations: [AppComponent, SidebarComponent, DashboardComponent, PanelRightComponent, InicioComponent, AgregarCategoriaComponent, BotonCancelarComponent, SkeletonGridComponent, ListadoDeCategoriasComponent, BotonEliminarComponent, AgregarProductoComponent, ListadoDeProductosComponent, MenuComponent, NavbarComponent, MalaCalificacionComponent, CalificacionEstrellasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

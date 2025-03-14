@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+<section class="w-full hero"></section>
+<div
+  class="py-[96px] sm:px-[1rem] lg:px-[2rem] mx-auto lg:w-[45%] md:w-[45%] sm:w-full relative"
+>
+  <form class="flex flex-col space-y-4" [formGroup]="formulario">
+    <h4 class="uppercase mx-auto">
+      ¡Tu crítica nos permitirá seguir mejorando!
+    </h4>
+    <!-- cantidad de estrellas -->
+    <div class="mb-6 gap-6 flex items-center justify-center w-full">
+      <i
+        class="fa-solid fa-star"
+        id="star1"
+        (click)="seleccionarEstrellas(1)"
+        [ngClass]="{ 'text-yellow-500': estrellasSeleccionadas >= 1 }"
+      ></i>
+      <i
+        class="fa-solid fa-star"
+        id="star2"
+        (click)="seleccionarEstrellas(2)"
+        [ngClass]="{ 'text-yellow-500': estrellasSeleccionadas >= 2 }"
+      ></i>
+      <i
+        class="fa-solid fa-star"
+        id="star3"
+        (click)="seleccionarEstrellas(3)"
+        [ngClass]="{ 'text-yellow-500': estrellasSeleccionadas >= 3 }"
+      ></i>
+      <i
+        class="fa-solid fa-star"
+        id="star4"
+        (click)="seleccionarEstrellas(4)"
+        [ngClass]="{ 'text-yellow-500': estrellasSeleccionadas >= 4 }"
+      ></i>
+      <i
+        class="fa-solid fa-star"
+        id="star5"
+        (click)="seleccionarEstrellas(5)"
+        [ngClass]="{ 'text-yellow-500': estrellasSeleccionadas >= 5 }"
+      ></i>
+    </div>
+
+    <div class="mb-6 hidden">
+      <label
+        for="nombre"
+        class="block mb-2 text-sm uppercase font-medium text-white"
+        >id</label
+      >
+      <input
+        type="text"
+        id="nombre"
+        class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Ingresa tu nombre"
+        formControlName="idResenia"
+      />
+    </div>
+    <div class="mb-6">
+      <label
+        for="nombre"
+        class="block mb-2 text-sm uppercase font-medium text-white"
+        >Nombre</label
+      >
+      <input
+        type="text"
+        id="nombre"
+        class="border text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Ingresa tu nombre"
+        formControlName="nombreCompleto"
+      />
+    </div>
+    <div class="mb-6">
+      <label
+        for="email"
+        class="block mb-2 text-sm uppercase font-medium text-white"
+        >Teléfono</label
+      >
+      <input
+        type="email"
+        id="email"
+        class="border text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 text-black focus:ring-blue-500 focus:border-blue-500"
+        placeholder="3547444444"
+        formControlName="celular"
+      />
+    </div>
+    <!-- tu opinion -->
+    <div class="mb-6">
+      <label for="message" class="block mb-2 text-sm font-medium text-white"
+        >Tu opinión</label
+      >
+      <textarea
+        id="message"
+        rows="4"
+        class="border text-sm rounded-lg block w-full p-2.5 text-black focus:ring-blue-500 focus:border-blue-500 resize-none"
+        placeholder="Dejanos tu opinión"
+        formControlName="detalleResenia"
+      ></textarea>
+    </div>
+
+    <div class="w-full flex">
+      <button
+        type="submit"
+        class="text-white mx-auto focus:ring-4 focus:outline-none font-medium rounded-lg text-sm lg:w-[50%] md:w-[50%] sm:w-full items-center gap-x-4 flex justify-center px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+        (click)="cargarResenia()"
+      >
+        Continuar
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </form>
+</div>

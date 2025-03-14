@@ -7,6 +7,8 @@ import { ListadoDeCategoriasComponent } from './panel/categorias/listado-de-cate
 import { AgregarProductoComponent } from './panel/productos/agregar-producto/agregar-producto.component';
 import { ListadoDeProductosComponent } from './panel/productos/listado-de-productos/listado-de-productos.component';
 import { MenuComponent } from './pages/menu/menu.component';
+import { CalificacionEstrellasComponent } from './pages/resenias/calificacion-estrellas/calificacion-estrellas.component';
+import { MalaCalificacionComponent } from './pages/resenias/mala-calificacion/mala-calificacion.component';
 
 const routes: Routes = [
   //F ************************************* PAGINAS **********************************
@@ -21,6 +23,17 @@ const routes: Routes = [
     path: 'ver-menu',
     component: MenuComponent,
     data: { title: 'Ver Menú | Menú QR' },
+  },
+  // RESEÑAS
+  {
+    path: 'calificacion',
+    component: CalificacionEstrellasComponent,
+    data: { title: 'Calificación | Menú QR' },
+  },
+  {
+    path: 'mejorar-puntuacion',
+    component: MalaCalificacionComponent,
+    data: { title: 'Mejorar puntuación | Menú QR' },
   },
   //F ************************************* PANEL **********************************
   // ------------------------ DASHBOARD
